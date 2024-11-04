@@ -1,0 +1,78 @@
+{%extends "layout.html"%}
+{%block content%}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card mt-5">
+                <div class="card-header"><h5 class="font-weight-light">Add New Student</h5></div>
+                <div class="card-body">
+                    {{form.errors}}
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {%csrf_token%}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{form.first_name}}
+                                    <label for="">{{form.first_name.label}}</label>
+                                    {{form.errors.first_name}}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{form.last_name}}
+                                    <label for="">{{form.last_name.label}}</label>
+                                    {{form.errors.last_name}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{form.gender}}
+                            <label for="">{{form.gender.label}}</label>
+                            {{form.errors.gender}}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            {{form.email}}
+                            <label for="">{{form.email.label}}</label>
+                            {{form.errors.email}}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            {{form.parents_mobile}}
+                            <label for="">{{form.parents_mobile.label}}</label>
+                            {{form.errors.parents_mobile}}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{form.aadhar_number}}
+                            <label for="">{{form.aadhar_number.label}}</label>
+                            {{form.errors.aadhar_number}}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{form.address}}
+                            <label for="">{{form.address.label}}</label>
+                            {{form.errors.address}}
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            {{form.profile_pic}}
+                            <!--<label for="">{{form.profile_pic.label}}</label>-->
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{form.admission_date}}
+                            <label for="">{{form.admission_date.label}}</label>
+                            {{form.errors.admission_date}}
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button type="submit" class="btn btn-dark btn-sm">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

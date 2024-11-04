@@ -44,9 +44,15 @@
     <Compile Include="SchoolFeeManagementApp\wsgi.py" />
     <Compile Include="StudentApp\admin.py" />
     <Compile Include="StudentApp\apps.py" />
+    <Compile Include="StudentApp\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StudentApp\migrations\__init__.py" />
     <Compile Include="StudentApp\models.py" />
     <Compile Include="StudentApp\tests.py" />
+    <Compile Include="StudentApp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StudentApp\views.py" />
     <Compile Include="StudentApp\__init__.py" />
   </ItemGroup>
@@ -54,12 +60,16 @@
     <Content Include="FeeApp\templates\FeeApp\index.html" />
     <Content Include="requirements.txt" />
     <Content Include="StudentApp\templates\StudentApp\index.html" />
+    <Content Include="StudentApp\templates\StudentApp\students_list.html" />
+    <Content Include="StudentApp\templates\StudentApp\student_add.html" />
+    <Content Include="templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FeeApp\" />
     <Folder Include="FeeApp\migrations\" />
     <Folder Include="FeeApp\templates\" />
     <Folder Include="FeeApp\templates\FeeApp\" />
+    <Folder Include="templates\" />
     <Folder Include="SchoolFeeManagementApp\" />
     <Folder Include="StudentApp\" />
     <Folder Include="StudentApp\migrations\" />

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'StudentApp',
+    'FeeApp',
 ]
 
 # Middleware framework
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'SchoolFeeManagementApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'SchoolFeeManagementApp.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-         'ENGINE': os.getenv('ENGINE'),
+        'ENGINE': os.getenv('ENGINE'),
         'HOST': os.getenv('HOST'),
         'NAME': os.getenv('NAME'),
         'USER': os.getenv('USER'),

@@ -1,0 +1,96 @@
+{%extends "layout.html"%}
+{%load static%}
+{%block content%}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card shadow-lg mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col"><h5 class="text-left font-weight-light">Student List</h5></div>
+                        <div class="col">
+                            <a href="{%url 'student_add'%}" class="btn btn-dark btn-sm float-end">Add More</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="message-box">
+                        {%if messages%}
+                        {%for message in messages%}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {%endfor%}
+                        {%endif%}
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Photo</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Aadhar</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for student in students_list%}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td><img src="/media/{{student.profile_pic}}" style="width:50px" /></td>
+                                    <td>{{student.full_name}}</td>
+                                    <td>{{student.email}}</td>
+                                    <td>{{student.parents_mobile}}</td>
+                                    <td>{{student.aadhar_number}}</td>
+                                    <td>
+                                        <a href=""><i class="fa fa-edit text-black"></i></a>
+                                        <a href="" onclick="return confirm('Are you sure?')"><i class="fa fa-trash text-black"></i></a>
+                                        <a href="" class=""><i class="fa fa-id-card text-black"></i></a>
+                                        <!--<a href="" class="btn btn-primary btn-sm">view</a>-->
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="pagination float-end">
+                            <span class="step-links">
+                                {% if students_list.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ students_list.previous_page_number }}">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ students_list.number }} of {{ students_list.paginator.num_pages }}.
+                                </span>
+
+                                {% if students_list.has_next %}
+                                <a href="?page={{ students_list.next_page_number }}">next</a>
+                                <a href="?page={{ students_list.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+{%block script%}
+<script>
+    swal("Are you sure?", {
+        dangerMode: true,
+        buttons: true,
+    });
+</script>
+{%endblock%}
