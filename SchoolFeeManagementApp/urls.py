@@ -23,7 +23,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('session/',include('SessionApp.urls')),
+    path('class/',include('ClassApp.urls')),
     path('student/',include('StudentApp.urls')),
-    # path('fee/',include('FeeApp.urls')),
+    path('fee/',include('FeeApp.urls')),
     path('admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

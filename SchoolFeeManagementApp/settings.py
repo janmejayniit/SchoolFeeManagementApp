@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'StudentApp',
     'FeeApp',
+    'ClassApp',
+    'SessionApp',
 ]
 
 # Middleware framework

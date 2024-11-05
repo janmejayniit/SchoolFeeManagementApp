@@ -30,11 +30,30 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ClassApp\admin.py" />
+    <Compile Include="ClassApp\apps.py" />
+    <Compile Include="ClassApp\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClassApp\migrations\__init__.py" />
+    <Compile Include="ClassApp\models.py" />
+    <Compile Include="ClassApp\tests.py" />
+    <Compile Include="ClassApp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClassApp\views.py" />
+    <Compile Include="ClassApp\__init__.py" />
     <Compile Include="FeeApp\admin.py" />
     <Compile Include="FeeApp\apps.py" />
+    <Compile Include="FeeApp\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FeeApp\migrations\__init__.py" />
     <Compile Include="FeeApp\models.py" />
     <Compile Include="FeeApp\tests.py" />
+    <Compile Include="FeeApp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FeeApp\views.py" />
     <Compile Include="FeeApp\__init__.py" />
     <Compile Include="manage.py" />
@@ -42,6 +61,16 @@
     <Compile Include="SchoolFeeManagementApp\settings.py" />
     <Compile Include="SchoolFeeManagementApp\urls.py" />
     <Compile Include="SchoolFeeManagementApp\wsgi.py" />
+    <Compile Include="SessionApp\admin.py" />
+    <Compile Include="SessionApp\apps.py" />
+    <Compile Include="SessionApp\migrations\__init__.py" />
+    <Compile Include="SessionApp\models.py" />
+    <Compile Include="SessionApp\tests.py" />
+    <Compile Include="SessionApp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SessionApp\views.py" />
+    <Compile Include="SessionApp\__init__.py" />
     <Compile Include="StudentApp\admin.py" />
     <Compile Include="StudentApp\apps.py" />
     <Compile Include="StudentApp\forms.py">
@@ -57,18 +86,28 @@
     <Compile Include="StudentApp\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClassApp\templates\ClassApp\index.html" />
     <Content Include="FeeApp\templates\FeeApp\index.html" />
     <Content Include="requirements.txt" />
+    <Content Include="SessionApp\templates\SessionApp\index.html" />
     <Content Include="StudentApp\templates\StudentApp\index.html" />
     <Content Include="StudentApp\templates\StudentApp\students_list.html" />
     <Content Include="StudentApp\templates\StudentApp\student_add.html" />
     <Content Include="templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ClassApp\" />
+    <Folder Include="ClassApp\migrations\" />
+    <Folder Include="ClassApp\templates\" />
+    <Folder Include="ClassApp\templates\ClassApp\" />
     <Folder Include="FeeApp\" />
     <Folder Include="FeeApp\migrations\" />
     <Folder Include="FeeApp\templates\" />
     <Folder Include="FeeApp\templates\FeeApp\" />
+    <Folder Include="SessionApp\" />
+    <Folder Include="SessionApp\migrations\" />
+    <Folder Include="SessionApp\templates\" />
+    <Folder Include="SessionApp\templates\SessionApp\" />
     <Folder Include="templates\" />
     <Folder Include="SchoolFeeManagementApp\" />
     <Folder Include="StudentApp\" />
