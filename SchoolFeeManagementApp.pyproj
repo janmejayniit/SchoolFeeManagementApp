@@ -87,7 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClassApp\templates\ClassApp\index.html" />
+    <Content Include="FeeApp\templates\FeeApp\fee_details.html" />
+    <Content Include="FeeApp\templates\FeeApp\invoice_list.html" />
     <Content Include="FeeApp\templates\FeeApp\index.html" />
+    <Content Include="FeeApp\templates\FeeApp\print_invoice.html" />
     <Content Include="requirements.txt" />
     <Content Include="SessionApp\templates\SessionApp\index.html" />
     <Content Include="StudentApp\templates\StudentApp\index.html" />

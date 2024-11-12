@@ -2,16 +2,18 @@
 {%load static%}
 {%block style%}
 <style>
-    active > .page-link, .page-link.active {    
+    active > .page-link, .page-link.active {
         background-color: #000;
         border-color: #000;
     }
-    .page-link {   
-        color: #0e0e0e;    
-    }
-    .page-link:hover {
+
+    .page-link {
         color: #0e0e0e;
     }
+
+        .page-link:hover {
+            color: #0e0e0e;
+        }
 </style>
 {%endblock%}
 {%block content%}
@@ -21,9 +23,9 @@
             <div class="card shadow-lg mt-5">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col"><h5 class="text-left font-weight-light">Student List</h5></div>
+                        <div class="col"><h5 class="text-left font-weight-light">Fee List</h5></div>
                         <div class="col">
-                            <a href="{%url 'student_add'%}" class="btn btn-dark btn-sm float-end">Add More</a>
+                            <a href="" class="btn btn-dark btn-sm float-end">Add More</a>
                         </div>
                     </div>
 
@@ -45,76 +47,70 @@
                             <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Photo</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Aadhar</th>
+                                    <th>Session</th>
+                                    <th>Class</th>
+                                    <th>Student</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {%for student in students_list%}
+                                {%for invoice in invoices_list%}
                                 <tr>
                                     <td>{{forloop.counter}}</td>
-                                    <td><img src="/media/{{student.profile_pic}}" style="width:50px" /></td>
-                                    <td>{{student.full_name}}</td>
-                                    <td>{{student.email}}</td>
-                                    <td>{{student.parents_mobile}}</td>
-                                    <td>{{student.aadhar_number}}</td>
+                                    <td>{{invoice.session}}</td>
+                                    <td>{{invoice.class_id}}</td>
+                                    <td>{{invoice.student}}</td>
+                                    <td>₹{{invoice.total_amount}}</td>
+                                    <td>{{invoice.payment_date}}</td>
                                     <td>
-                                        <a href=""><i class="fa fa-edit text-black"></i></a>
-                                        <a href="" onclick="return confirm('Are you sure?')"><i class="fa fa-trash text-black"></i></a>
-                                        <a href="" class=""><i class="fa fa-id-card text-black"></i></a>
-                                        <a href="" class=""><i class="fa fa-inr text-black"></i></a>
-                                        <!--<a href="" class="btn btn-primary btn-sm">view</a>-->
+                                        <a href="{%url 'fee_details' invoice.id%}"><i class="fa fa-bars text-dark"></i></a>
                                     </td>
                                 </tr>
                                 {%endfor%}
                             </tbody>
-
                         </table>
-
                     </div>
                     <div class="card-footer">
                         <nav aria-label="...">
                             <ul class="pagination justify-content-end">
 
-                                {% if students_list.has_previous %}
+                                {% if invoices_list.has_previous %}
                                 <li class="page-item">
-                                    <a href="?page={{ students_list.previous_page_number }}" class="page-link">Previous page</a>
+                                    <a href="?page={{ invoices_list.previous_page_number }}" class="page-link">Previous page</a>
                                 </li>
-                                {% if students_list.number > 3 %}
+                                {% if invoices_list.number > 3 %}
                                 <li class="page-item"><a href="?page=1" class="page-link">1</a></li>
-                                {% if students_list.number > 4 %}
+                                {% if invoices_list.number > 4 %}
                                 <span>...</span>
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
 
-                                {% for num in students_list.paginator.page_range %}
-                                {% if students_list.number == num %}
+                                {% for num in invoices_list.paginator.page_range %}
+                                {% if invoices_list.number == num %}
                                 <li class="page-item"><a href="?page={{ num }}" class="page-link active">{{ num }}</a></li>
-                                {% elif num > students_list.number|add:'-3' and num < students_list.number|add:'3' %}
+                                {% elif num > invoices_list.number|add:'-3' and num < invoices_list.number|add:'3' %}
                                 <li class="page-item">
                                     <a href="?page={{ num }}" class="page-link">{{ num }}</a>
                                 </li>
                                 {% endif %}
                                 {% endfor %}
 
-                                {% if students_list.has_next %}
-                                {% if students_list.number < students_list.paginator.num_pages|add:'-3' %}
+                                {% if invoices_list.has_next %}
+                                {% if invoices_list.number < invoices_list.paginator.num_pages|add:'-3' %}
                                 <span>...</span>
                                 <li class="page-item">
-                                    <a href="?page={{ students_list.paginator.num_pages }}" class="page-link">{{ students_list.paginator.num_pages }}</a>
+                                    <a href="?page={{ invoices_list.paginator.num_pages }}" class="page-link">{{ invoices_list.paginator.num_pages }}</a>
                                 </li>
-                                {% elif students_list.number < students_list.paginator.num_pages|add:'-2' %}
+                                {% elif invoices_list.number < invoices_list.paginator.num_pages|add:'-2' %}
                                 <li class="page-item">
-                                    <a href="?page={{ students_list.paginator.num_pages }}" class="page-link">{{ students_list.paginator.num_pages }}</a>
+                                    <a href="?page={{ invoices_list.paginator.num_pages }}" class="page-link">{{ invoices_list.paginator.num_pages }}</a>
                                 </li>
                                 {% endif %}
                                 <li class="page-item">
-                                    <a href="?page={{ students_list.next_page_number }}" class="page-link">Next Page</a>
+                                    <a href="?page={{ invoices_list.next_page_number }}" class="page-link">Next Page</a>
                                 </li>
                                 {% endif %}
                             </ul>

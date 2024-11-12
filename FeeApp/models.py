@@ -15,12 +15,23 @@ class FeeMaster(models.Model):
     def __str__(self):
         return self.fee_name
 
-class StudentFee(models.Model):
+class FeeInvoice(models.Model):
     session = models.ForeignKey(SessionMaster, default=None, on_delete=models.CASCADE)
     class_id = models.ForeignKey(ClassMaster, default=None, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, default=None, on_delete=models.CASCADE)
+    payment_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    payment_date = models.DateTimeField(auto_now_add=True)
+    gst_percentage = models.DecimalField(max_digits=5, decimal_places=2)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date =  models.DateTimeField(auto_now=True)
+
+
+class StudentFee(models.Model):
+    invoice = models.ForeignKey(FeeInvoice, on_delete=models.CASCADE)
     fee = models.ForeignKey(FeeMaster, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(default=timezone.now)
+
+
 
 

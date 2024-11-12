@@ -1,0 +1,135 @@
+﻿<html>
+   <head>
+       <title>Fee of {{fee_invoice.student|title}}({{fee_invoice.student.email}})</title>
+       <style>
+           body{
+               font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+           }
+           a:link {
+               text-decoration: none;
+               color: black;
+           }
+
+/*           a:visited {
+               text-decoration: none;
+               color:black;
+           }
+
+           a:hover {
+               text-decoration: none;
+               color: black;
+           }
+
+           a:active {
+               text-decoration: none;
+               color: black;
+           }*/
+           
+       </style>
+   </head>
+   <body>
+
+       <div style="border:0px solid black;">
+
+
+           <table width="100%">
+               <tr>
+                   <td align="center" colspan="4" style="font-weight: bold; font-size: 30px; font-family:Arial, Helvetica, sans-serif "> Fee Invoice</td>
+               </tr>
+               <tr>
+                   <td>Institution Name:</td>
+                   <td colspan="3">&nbsp;</td>
+               </tr>
+               <tr>
+                   <td colspan="4">Address</td>
+               </tr>
+               <tr>
+                   <td colspan="4">&nbsp;</td>
+               </tr>
+               <tr>
+                   <td colspan="4">&nbsp;</td>
+               </tr>
+               <tr>
+                   <td>Phone No:</td>
+                   <td colspan="3">&nbsp;</td>
+               </tr>
+               <tr>
+                   <td>Email:</td>
+                   <td colspan="3">&nbsp;</td>
+               </tr>
+
+               <tr>
+                   <td colspan="2" style="font-weight:bold">Student Details</td>
+                   <td colspan="2" style="font-weight:bold">Invoice Details</td>
+               </tr>
+               <tr>
+                   <td>Student Name: {{fee_invoice.student}}</td>
+                   <td colspan="3"></td>
+               </tr>
+               <tr>
+                   <td>Roll Number: {{fee_invoice.id}}</td>
+                   <td>&nbsp;</td>
+                   <td> Invoice No.:#{{fee_invoice.id}}</td>
+                   <td>&nbsp;</td>
+               </tr>
+               <tr>
+                   <td colspan="2">Address</td>
+                   <td>Date: {{fee_invoice.payment_date}}</td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td colspan="4">{{fee_invoice.student.address}}</td>
+
+               </tr>
+               <tr>
+                   <td colspan="4">&nbsp;</td>
+
+               </tr>
+               <tr>
+                   <td>Phone No: {{fee_invoice.student.parents_mobile}}</td>
+                   <td>&nbsp;</td>
+                   <td>Payment Due Date: Nov. 12, 2024</td>
+                   <td>&nbsp;</td>
+               </tr>
+               <tr>
+                   <td>Email: {{fee_invoice.student.email}}</td>
+                   <td>&nbsp;</td>
+                   <td>Payment Mode: Cash</td>
+                   <td>&nbsp;</td>
+               </tr>
+           </table>
+           <table width="100%" border="0" style="border-top:1px solid">
+               <thead>
+                   <tr>
+                       <th align="left">SN</th>
+                       <th align="left">Fee</th>
+                       <th align="left">Amount</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   {%for fee in fee_detail%}
+                   <tr>
+                       <td>{{forloop.counter}}</td>
+                       <td>{{fee.fee}}</td>
+                       <td>₹{{fee.amount}}</td>
+                   </tr>
+                   {%endfor%}
+               </tbody>
+           </table>
+           <table style="border-top:1px solid; border-bottom:1px solid;" width="100%">
+               <tr>
+                   <td>Amount In Words: {{amount_word|title}}</td>
+                   <td align="center">Total Amount: ₹{{fee_invoice.total_amount}}</td>
+
+               </tr>
+           </table>
+           <br />
+           <br />
+           <br />
+           <p align="right" style="font-size:12px;font-family:Arial;font-weight:bold;"><u>Seal & Signature</u></p>
+       </div>
+       <div style="text-align:center;margin-bottom:10px;">
+           <a href="javascript:;" onclick="window.print();" style="text-decoration:none; border:1px solid black;padding:5px;">Print</a>
+       </div>
+   </body>
+</html>
