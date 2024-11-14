@@ -1,0 +1,201 @@
+{%extends "layout.html"%}
+{%block content%}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                <div class="card mt-5">
+                    <div class="card-header"><h5 class="font-weight-light">Add New Invoice</h5></div>
+                    <div class="card-body">
+                        {{invoice_form.errors}}
+
+                        {%csrf_token%}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{invoice_form.session}}
+                                    <label for="">{{invoice_form.session.label}}</label>
+                                    {{invoice_form.errors.session}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{invoice_form.class_id}}
+                                    <label for="">{{invoice_form.class_id.label}}</label>
+                                    {{invoice_form.errors.class_id}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            {{invoice_form.student}}
+                            <label for="">{{invoice_form.student.label}}</label>
+                            {{invoice_form.errors.student}}
+                        </div>
+                         
+                    </div>
+
+                </div>
+                <div class="card mt-2" id="">
+                    <div class="card-header ">
+                        <button type="button" class="btn btn-dark btn-sm float-end" onclick="add_fee_div()">Add More</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{fee_form.fee}}
+                                    <label for="">{{fee_form.fee.label}}</label>
+                                    {{fee_form.errors.fee}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{fee_form.amount}}
+                                    <label for="">{{fee_form.amount.label}}</label>
+                                    {{fee_form.errors.amount}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <template id="__fee_tmpl">
+                    <div class="card mt-2">
+                        <div class="card-header ">
+                            <button type="button" class="btn btn-dark btn-sm float-end" onclick="add_fee_div()" style="border-radius: 0px; font-size: 8px;"><b>+</b></button>
+                            <button type="button" class="btn btn-danger btn-sm float-end mr-2" onclick="remove_fee_div(event)" style="margin-right: 2px; border-radius: 0px; font-size: 8px;"><b>x</b></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        {{fee_form.fee}}
+                                        <label for="">{{fee_form.fee.label}}</label>
+                                        {{fee_form.errors.fee}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        {{fee_form.amount}}
+                                        <label for="">{{fee_form.amount.label}}</label>
+                                        {{fee_form.errors.amount}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div id="fee_container">
+
+                </div>
+                <div class="card mt-5">
+                     
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{invoice_form.payment_amount}}
+                                    <label for="">{{invoice_form.payment_amount.label}}</label>
+                                    {{invoice_form.errors.payment_amount}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{invoice_form.gst_percentage}}
+                                    <label for="">{{invoice_form.gst_percentage.label}}</label>
+                                    {{invoice_form.errors.gst_percentage}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    {{invoice_form.total_amount}}
+                                    <label for="">{{invoice_form.total_amount.label}}</label>
+                                    {{invoice_form.errors.total_amount}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button type="submit" class="btn btn-dark btn-sm">Add</button>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}
+{%block script%}
+<script>
+    const add_fee_div = () => {
+        const template = document.getElementById('__fee_tmpl');
+        const fee_container = document.getElementById('fee_container');
+        fee_container.append(template.content.cloneNode(true));
+    }
+    const remove_fee_div = (event) => {
+        const feeDiv = event.target.closest('.card');
+        if (feeDiv) {
+            feeDiv.remove();
+        }
+    }
+    $(document).ready(function () {
+        $('#class_id, #session').change(function () {
+            var class_id = $('#class_id').val();
+            var session = $('#session').val();
+
+            if (class_id && session) {
+                $.ajax({
+                    url: "{% url 'get_students' %}",
+                    data: {
+                        'class_id': class_id,
+                        'session': session
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var $studentField = $('#student');
+                        $studentField.empty();
+                        $studentField.append('<option value="">Select a student</option>');
+                        $.each(data.students, function (index, student) {
+                            $studentField.append('<option value="' + student.id + '">' + student.first_name + ' ' + student.last_name + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    const payment_amount = document.getElementById('payment_amount');
+    const gst_percentage = document.getElementById('gst_percentage');
+    const total_amount = document.getElementById('total_amount');
+   
+
+    payment_amount.addEventListener('blur', () => {
+        calculatePaymentAmount();
+    })
+    gst_percentage.addEventListener('blur', () => {
+        calculatePaymentAmount();
+    })
+    total_amount.addEventListener('blur', () => {
+        calculatePaymentAmount();
+    })
+
+    const calculatePaymentAmount = () => {
+        const amounts = document.getElementsByClassName('amount');
+        let total = 0;
+        Array.from(amounts).forEach(item => {
+            total += parseFloat(item.value) || 0;  // Ensure you handle non-numeric values
+        });
+
+        payment_amount.value = total;
+        total_amount.value=total
+    }
+
+    
+
+</script>
+{%endblock%}

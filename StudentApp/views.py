@@ -43,6 +43,3 @@ def add_new(request):
         #     student.save()
 
         return render(request, 'StudentApp/student_add.html',{'form':form})
-
-    
-
