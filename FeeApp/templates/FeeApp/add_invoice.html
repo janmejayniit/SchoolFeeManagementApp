@@ -62,9 +62,9 @@
                 </div>
                 <template id="__fee_tmpl">
                     <div class="card mt-2">
-                        <div class="card-header ">
-                            <button type="button" class="btn btn-dark btn-sm float-end" onclick="add_fee_div()" style="border-radius: 0px; font-size: 8px;"><b>+</b></button>
-                            <button type="button" class="btn btn-danger btn-sm float-end mr-2" onclick="remove_fee_div(event)" style="margin-right: 2px; border-radius: 0px; font-size: 8px;"><b>x</b></button>
+                        <div class="card-header text-right">
+                            <button type="button" class="btn btn-dark btn-sm" onclick="add_fee_div()" style="border-radius: 0px; font-size: 8px;"><b>+</b></button>
+                            <button type="button" class="btn btn-danger btn-sm mr-2" onclick="remove_fee_div(event)" style="margin-right: 2px; border-radius: 0px; font-size: 8px;"><b>x</b></button>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -162,6 +162,31 @@
                         $studentField.append('<option value="">Select a student</option>');
                         $.each(data.students, function (index, student) {
                             $studentField.append('<option value="' + student.id + '">' + student.first_name + ' ' + student.last_name + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#class_id').change(function () {
+            var class_id = $('#class_id').val();
+            
+
+            if (class_id ) {
+                $.ajax({
+                    url: "{% url 'get_fee' %}",
+                    data: {
+                        'class_id': class_id,    
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var $studentField = $('.fee');
+                        $studentField.empty();
+                        $studentField.append('<option value="">Select Fee</option>');
+                        $.each(data.fees, function (index, fee) {
+                            $studentField.append('<option value="' + fee.id + '">' + fee.fee_name +'</option>');
                         });
                     }
                 });

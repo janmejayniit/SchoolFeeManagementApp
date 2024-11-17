@@ -3,8 +3,8 @@
 {%block style%}
 <style>
     active > .page-link, .page-link.active {
-        background-color: #000;
-        border-color: #000;
+/*        background-color: #000;
+        border-color: #000;*/
     }
 
     .page-link {
@@ -24,8 +24,8 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col"><h5 class="text-left font-weight-light">Fee List</h5></div>
-                        <div class="col">
-                            <a href="" class="btn btn-dark btn-sm float-end">Add More</a>
+                        <div class="col text-right">
+                            <a href="{%url 'add_invoice'%}" class="btn btn-dark btn-sm">Add More</a>
                         </div>
                     </div>
 

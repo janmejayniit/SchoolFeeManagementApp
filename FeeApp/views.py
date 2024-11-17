@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import F
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import StudentFee, FeeInvoice, FeeMaster
 from SessionApp.models import SessionMaster
@@ -42,6 +43,15 @@ def add_invoice(request):
                  return render(request, 'FeeApp/add_invoice.html', {'invoice_form':invoice_form, 'fee_form':form})
     return render(request, 'FeeApp/add_invoice.html', {'invoice_form':invoice_form, 'fee_form':fee_form})
 
+def get_fee(request):
+    class_id = request.GET.get('class_id')
+    
+    fee_obj = FeeMaster.objects.filter(class_id=class_id).all()
+    fee_arr=[]
+    if fee_obj:
+        for _ in fee_obj:
+            fee_arr.append({'id':_.id,'fee_name':_.fee_name})
+    return JsonResponse({'fees': list(fee_arr)})
 
 def convert_to_words(num):  
     if num == 0:  

@@ -97,6 +97,7 @@
     <Content Include="StudentApp\templates\StudentApp\index.html" />
     <Content Include="StudentApp\templates\StudentApp\students_list.html" />
     <Content Include="StudentApp\templates\StudentApp\student_add.html" />
+    <Content Include="templates\layout-2.html" />
     <Content Include="templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
